@@ -13,9 +13,9 @@ cd 01-Login
 npm install
 ```
 
-## Set the Client ID and Domain (auth0-variables-test.js)
+## Set the Client ID and Domain (auth0-variables.js)
 
-If you download the sample from the quickstart page, it will come pre-populated with the **client ID** and **domain** for your application. If you clone the repo directly from Github, rename the `auth0-variables-test.js.example` file to `auth0-variables-test.js` and provide the **client ID** and **domain** there. This file is located in `src/auth/`.
+If you download the sample from the quickstart page, it will come pre-populated with the **client ID** and **domain** for your application. If you clone the repo directly from Github, rename the `auth0-variables.js.example` file to `auth0-variables.js` and provide the **client ID** and **domain** there. This file is located in `src/auth/`.
 
 ## Run the Application
 
