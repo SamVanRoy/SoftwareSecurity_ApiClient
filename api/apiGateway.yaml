@@ -1,0 +1,191 @@
+---
+swagger: "2.0"
+info:
+  version: "2017-12-18T00:22:36Z"
+  title: "SoftSecRest"
+host: "2thbozma8e.execute-api.eu-west-1.amazonaws.com"
+basePath: "/backup"
+schemes:
+- "https"
+paths:
+  /private:
+    get:
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      security:
+      - jwt-rsa-custom-authorizer: []
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        uri: "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:676288454209:function:privateGet/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+    x-amazon-apigateway-any-method:
+      consumes:
+      - "application/json"
+      responses:
+        405:
+          description: "405 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "405"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+  /public:
+    get:
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        uri: "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:676288454209:function:publicGet/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+    x-amazon-apigateway-any-method:
+      consumes:
+      - "application/json"
+      responses:
+        405:
+          description: "405 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "405"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+  /{proxy+}:
+    x-amazon-apigateway-any-method:
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "proxy"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        404:
+          description: "404 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "404"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+securityDefinitions:
+  jwt-rsa-custom-authorizer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    x-amazon-apigateway-authtype: "custom"
+    x-amazon-apigateway-authorizer:
+      authorizerCredentials: "arn:aws:iam::676288454209:role/lambda_private_auth0_role"
+      authorizerUri: "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:676288454209:function:jwtRsaCustomAuthorizer/invocations"
+      authorizerResultTtlInSeconds: 300
+      identityValidationExpression: "^Bearer [-0-9a-zA-Z\\._]*$"
+      type: "token"
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_4XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+  DEFAULT_5XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
