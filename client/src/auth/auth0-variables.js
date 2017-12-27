@@ -4,4 +4,3 @@ export const AUTH_CONFIG = {
   callbackUrl: 'http://localhost:8080/callback',
   apiUrl: '{API_IDENTIFIER}'
 }
-
